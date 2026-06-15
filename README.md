@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# College List — Admissions Decision Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, single-page tool for building, scoring, and deciding a college list.
+Add schools, weight 30 decision criteria, work each school through eight
+decision frameworks, assign holistic grades, compare schools side by side, and
+export a print-ready dossier.
 
-Currently, two official plugins are available:
+**Live:** https://college-list-app-eight.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Dashboard** — tier breakdown, average matrix score, framework completion,
+  visit progress, a top-schools leaderboard, grade distribution, action-required
+  cards, an auto-saving notepad, and a recent-activity feed.
+- **My Schools** — sortable, filterable table (tier, status, visit, framework
+  completion, grade) with inline priority stars and a slide-over detail drawer.
+- **Add / Edit** — a three-step wizard with validation and live character counts.
+- **Decision Matrix** — global weights and per-school scoring across 30 criteria
+  in six groups, with a category radar, school overlay, and a live ranking.
+- **Framework Evaluator** — eight sequential frameworks, each scored 1–10 with a
+  plain-English interpretation, feeding a combined keep/cut recommendation,
+  confidence level, and a synthesized summary paragraph.
+- **Grades** — A+ → F grading with GPA equivalents, a grade-vs-matrix scatter
+  plot, and a distribution chart.
+- **Comparison** — 2–4 schools side by side across stats, all 30 criteria, the
+  frameworks, and an auto-generated head-to-head analysis.
+- **Export** — a print-ready / PDF dossier plus a copy-to-clipboard text version.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Privacy
 
-## Expanding the ESLint configuration
+There is no backend and no account. All data lives in your browser's
+`localStorage` (key `college-list-app-v1`), scoped to your browser and device.
+Different visitors to the same URL each have their own separate list; your data
+never leaves your browser. Use **Export** to back it up.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Vite · React · TypeScript · Tailwind CSS · Zustand (with persist middleware) ·
+Radix UI primitives · Recharts · lucide-react · react-hot-toast · react-to-print.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Local development
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # type-check + production build to dist/
+npm run preview  # serve the production build locally
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Hosted on Vercel. With the GitHub repo connected, every push to `main`
+auto-deploys to production. To deploy manually instead:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npx vercel --prod
 ```
